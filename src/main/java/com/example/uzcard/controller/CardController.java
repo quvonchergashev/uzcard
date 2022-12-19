@@ -1,7 +1,7 @@
 package com.example.uzcard.controller;
 import com.example.uzcard.entity.Card;
 import com.example.uzcard.entity.Token;
-import com.example.uzcard.service.CardServiceImpl;
+import com.example.uzcard.service.interfaces.CardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @RequestMapping("/uzcard")
 public class CardController {
-    private final CardServiceImpl cardService;
+    private final CardService cardService;
 
     @GetMapping("/find-by-id{cardId}")
     public ResponseEntity<?> findById(
@@ -33,7 +33,6 @@ public class CardController {
         Token token = cardService.addCardForGenerateToken(cardMask);
         return ResponseEntity.ok(token);
     }
-
     @GetMapping("/find-by-token/{token}")
     public ResponseEntity<?> findByToken(
             @PathVariable String token

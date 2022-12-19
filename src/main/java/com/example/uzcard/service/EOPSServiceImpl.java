@@ -9,9 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class EOPSServiceImpl implements EOPSService {
-
     private final EOPSRepository eopsRepository;
-
     @Override
     public EOPS save(EOPS eops) {
         return eopsRepository.save(eops);

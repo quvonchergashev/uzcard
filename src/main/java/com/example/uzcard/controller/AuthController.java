@@ -1,7 +1,7 @@
 package com.example.uzcard.controller;
 import com.example.uzcard.dto.LoginDto;
 import com.example.uzcard.payload.ResponseApi;
-import com.example.uzcard.service.AuthServiceImpl;
+import com.example.uzcard.service.interfaces.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {
-
-    private final AuthServiceImpl authService;
-
+    private final AuthService authService;
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
         ResponseApi login = authService.login(loginDto);

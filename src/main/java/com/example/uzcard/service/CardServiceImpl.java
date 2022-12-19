@@ -6,10 +6,10 @@ import com.example.uzcard.exception.InsufficientAmountException;
 import com.example.uzcard.repositories.CardRepository;
 import com.example.uzcard.security.JwtProvider;
 import com.example.uzcard.service.interfaces.CardService;
+import com.example.uzcard.service.interfaces.TokenService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Map;
 import java.util.Optional;
 
 
@@ -18,7 +18,7 @@ import java.util.Optional;
 public class CardServiceImpl implements CardService {
     private final CardRepository cardRepository;
     private final JwtProvider jwtProvider;
-    private final TokenServiceImpl tokenService;
+    private final TokenService tokenService;
     @Override
     public Card findById(Long id) {
         return cardRepository.findById(id).get();
@@ -59,7 +59,6 @@ public class CardServiceImpl implements CardService {
     public Card save(Card card) {
         return cardRepository.save(card);
     }
-
     @Override
     public Long refresh(String token) {
         Card byToken = findByToken(token);

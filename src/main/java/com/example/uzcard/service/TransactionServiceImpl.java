@@ -8,11 +8,11 @@ import com.example.uzcard.dto.GiveMoneyDto;
 import com.example.uzcard.entity.Card;
 import com.example.uzcard.entity.EOPS;
 import com.example.uzcard.entity.Transaction;
-import com.example.uzcard.entity.User;
 import com.example.uzcard.repositories.TransactionRepository;
+import com.example.uzcard.service.interfaces.CardService;
+import com.example.uzcard.service.interfaces.EOPSService;
 import com.example.uzcard.service.interfaces.TransactionService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -23,12 +23,9 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class TransactionServiceImpl implements TransactionService {
-
     private final TransactionRepository transactionRepository;
-
-    private final EOPSServiceImpl eopsService;
-
-    private final CardServiceImpl cardService;
+    private final EOPSService eopsService;
+    private final CardService cardService;
     @Override
     public FindByIdCardDataDto findByIdCard(String cardNumber) {
         Optional<Card> byCardNumber = cardService.findByCardNumberForTransaction(cardNumber);
@@ -75,7 +72,6 @@ public class TransactionServiceImpl implements TransactionService {
         }
         return new CheckTransactionDto(String.valueOf(Status.FAILED),null);
     }
-
     @Override
     public CheckTransactionDto getMoney(GetMoneyDto getMoneyDto) {
         Card byCardNumber = cardService.findByCardNumber(getMoneyDto.getCardNumber());
