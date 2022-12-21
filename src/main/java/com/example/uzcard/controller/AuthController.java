@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
     private final AuthService authService;
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody LoginDto loginDto) {
+    public ResponseEntity<?> login(
+            @RequestBody LoginDto loginDto
+    ) {
         ResponseApi login = authService.login(loginDto);
         if (login.isSuccess()) return ResponseEntity.ok(login);
         return ResponseEntity.status(409).body(login);
